@@ -1,5 +1,5 @@
 <ul>
 {% for track in tracks %}
-<li>{{ track.track_name }} by {{ track.artist_name }}</li>
+<li>{{ track.track_name }} by {{ track.artist_name }} - <a href="/playback/?track={{ track.track_name }}&artist={{ track.artist_name }}">play</a></li>
 {% endfor %}
 </ul>
