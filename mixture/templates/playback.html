@@ -9,7 +9,9 @@
 <iframe width="1" height="1" src="{{ track.embedUrl }}?autoplay=true"></iframe>
 
 About {{ artist.prefLabel }}:
+{% autoescape off %}
 {{ artist.description.value }}
+{% endautoescape %}
 {% if artist.thumbnail %}<img src="{{ artist.thumbnail.uri }}"/>{% endif %}
 
 </body>
