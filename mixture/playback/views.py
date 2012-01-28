@@ -13,6 +13,7 @@ def playback(request):
 
   import logging
   logging.info('HELLO, WORLD')
+  print 'HI THERE'
 
   response = rdio.call('search', {
     'types':'track',
