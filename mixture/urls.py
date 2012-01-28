@@ -10,7 +10,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^image/$', 'image.views.index'),
     url(r'^image/(....+)', 'image.views.poll'),
-    url(r'^playback/', 'playback.views.playback')
+    url(r'^playback/', 'playback.views.playback'),
+    url(r'^image/', 'image.views.index'),
+    url(r'^play/(?P<terms>[\w.\+_:-]+)+', 'song.views.index'),
 )
