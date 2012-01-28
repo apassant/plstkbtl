@@ -1,6 +1,9 @@
 # -*- coding: UTF-8 -*-
 import os
-import simplejson
+try:
+  import simplejson
+except:
+  import json as simplejson
 import hmac
 from hashlib import sha1
 from datetime import datetime
