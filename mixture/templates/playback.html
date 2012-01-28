@@ -10,7 +10,7 @@
 
 About {{ artist.prefLabel }}:
 {% autoescape off %}
-{{ artist.description.value }}
+{{ artist.infos.description.value }}
 {% endautoescape %}
 {% if artist.thumbnail %}<img src="{{ artist.thumbnail.uri }}"/>{% endif %}
 
