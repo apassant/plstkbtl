@@ -8,5 +8,9 @@
 <p>Let's play {{ track.artist }} / {{ track.name }}</p>
 <iframe width="1" height="1" src="{{ track.embedUrl }}?autoplay=true"></iframe>
 
+About {{ artist.prefLabel }}:
+{{ artist.description.value }}
+{% if artist.thumbnail %}<img src="{{ artist.thumbnail.uri }}"/>{% endif %}
+
 </body>
 </html>
