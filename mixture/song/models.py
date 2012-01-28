@@ -21,6 +21,6 @@ class MusixMatch(object):
     def filterTracks(self, tracks):
         """Get only tracks with artist matching in seevl"""
         return filter(lambda x: 
-            len(SeevlEntitySearch({'prefLabel' : x.artist_name}, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()),
+            len(SeevlEntitySearch({'prefLabel' : x.artist_name.encode('utf-8')}, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()),
             tracks)
         
