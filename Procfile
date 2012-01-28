@@ -1,1 +1,1 @@
-web: python mixture/manage.py runserver $PORT
+worker: python mixture/manage.py runserver $PORT
