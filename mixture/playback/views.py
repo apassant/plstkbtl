@@ -2,9 +2,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render_to_response
 
-import logging
-logging.info('hello')
-from mixture.seevl import SeevlEntitySearch
+from mixture.seevl.seevl import SeevlEntitySearch
 from rdio import Rdio
 rdio = Rdio((settings.RDIO_KEY, settings.RDIO_SECRET))
 
