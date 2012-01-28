@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^image/$', 'image.views.index'),
     url(r'^image/(....+)', 'image.views.poll'),
+    url(r'^playback/', 'playback.views.playback')
 )

@@ -146,3 +146,8 @@ LOGGING = {
         },
     }
 }
+
+
+RDIO_KEY='get88kny6fxyupe5te8ngpr6'
+RDIO_SECRET='2za8DJfupV'
+RDIO_PLAYBACK_TOKEN='GAlPJCoq_____2dldDg4a255NmZ4eXVwZTV0ZThuZ3ByNmxvY2FsaG9zdD7DEzP49OTem367x3nOkLw='
