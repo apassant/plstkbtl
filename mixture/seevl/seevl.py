@@ -191,6 +191,7 @@ def querySeevlEndpoint(query, seevl_app_id=False, seevl_app_key=False):
     try:
         request = opener.open(SEEVL_ENDPOINT + query)
     except HTTPError as error:
+        print error
         raise SeevlError(error)
 
     ## Get JSON data
