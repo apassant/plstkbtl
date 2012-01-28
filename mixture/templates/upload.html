@@ -2,14 +2,22 @@
 <html>
 <head>
   <title>Upload an image</title>
+  <script src="/static/webcam.js"></script>
 </head>
 <body>
-<h1>Upload an image.</h1>
+<h1>Take a picture</h1>
 
-<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+<script language="JavaScript">
+  webcam.set_swf_url('/static/webcam.swf');
+  webcam.set_shutter_sound(true, '/static/shutter.mp3');
+  document.write(webcam.get_html(320, 240));
+  webcam.set_api_url('/upload/');
+  webcam.set_hook('onComplete', 'my_callback_function');
+  function my_callback_function(response) {
+    window.location.href=response;
+  }
+</script>
+<a href="javascript:void(webcam.snap())">Take Snapshot</a>
 
 
 </body>

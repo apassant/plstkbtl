@@ -1,1 +1,4 @@
 *.pyc
+mixture/static/upload/*.jpg
+.idea
+*.iml
