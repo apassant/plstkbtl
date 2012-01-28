@@ -2,22 +2,25 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render_to_response
 
-from seevl import Seevl
+from seevl import SeevlEntitySearch
 from rdio import Rdio
 rdio = Rdio((settings.RDIO_KEY, settings.RDIO_SECRET))
 
 def playback(request):
+  
+  artist = request.REQUEST.get('artist', '')
+  track = request.REQUEST.get('track', '')
+
   response = rdio.call('search', {
     'types':'track',
-    'query': request.REQUEST.get('artist', '') + ' ' + request.REQUEST.get('track', '')
+    'query': "%s %s" %(artist, track)
   })
-
-  s = Seevl(settings.SEEVL_APP_ID, settings.SEEVL_APP_KEY)
-  artist = s.search_by_name(request.REQUEST.get('artist', ''))[0]
+  
+  seevlArtist = SeevlEntitySearch({'prefLabel' : artist}).run()[0]
   
   context = {
     'track': response['result']['results'][0],
-    'artist' : artist
+    'artist' : seevlArtist
   }
   
   return render_to_response('playback.html', context)

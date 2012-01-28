@@ -12,11 +12,13 @@ For more informations, see : http://data.developers.seevl.net/wiki
 import json
 import os
 
-try:
-    import urllib.request, urllib.parse
+try: # Python 3
+    import urllib.request as urllib_request
+    import urllib.parse as urllib_parse
     from urllib.request import HTTPError
-except ImportError: # python 2
-    import urllib2, urllib
+except ImportError: # Python 2
+    import urllib2 as urllib_request
+    import urllib as urllib_parse
     from urllib2 import HTTPError
 
 
@@ -24,26 +26,38 @@ except ImportError: # python 2
 
 # You can give your credentials here, or you can put them in SEEVL_APP_ID and SEEVL_APP_KEY environment variables.
 # Or, if you use only the api_call() function to directly call the api, you can pass them as parameters of this functino.
-#DEFAULT_APP_ID = ''
-#DEFAULT_APP_KEY = ''
 
-# Helpers functions
-
-def cached_property(func):
-    """ Decorator to make a property, but the value will only be calculated once """
-    def wrapper(self):
-        attr_name = '_' + func.__name__
-        if not hasattr(self, attr_name):
-            setattr(self, attr_name, func(self))
-        return getattr(self, attr_name)
-    wrapper.__doc__ = func.__doc__
-    return property(wrapper)
+#def cached_property(func):
+ #   """ Decorator to make a property, but the value will only be calculated once """
+  #  def wrapper(self):
+   #     attr_name = '_' + func.__name__
+    #    if not hasattr(self, attr_name):
+     #       setattr(self, attr_name, func(self))
+      #  return getattr(self, attr_name)
+#    wrapper.__doc__ = func.__doc__
+ #   return property(wrapper)
 
 
-class IncorrectCredentials(RuntimeError):
-    __str__ = lambda self: "You need to provide valid API credentials to make requests, please see the top of this file (%s) for more infos." % __file__
+#class SeevlError(Exception):   
+ #   def __init__(self, error, message=None):
+#        self.args = []
+#      self.mxm_code = code
+ #           if message is None:
+#              message = status_code(code)
+ #         self.args = ('MusixMatch API Error %d: %s' % (code, message),)
+          
+#    def __init__(self, error):
+ #       self.erro
+  #  def __str__(self):
+   #     print self.error
+#class IncorrectCredentials(RuntimeError):
+#    __str__ = lambda self: "You need to provide valid API credentials to make requests, please see the top of this file (%s) for more infos." % __file__
 
 # API Functions/Classes you can use
+
+#########################
+### Entity
+#########################
 
 class SeevlEntity():
 
@@ -57,7 +71,6 @@ class SeevlEntity():
 
     def __eq__(self, other):
         return self.uri == other.uri
-
     __ne__ = lambda self, other: not self == other
 
     def __str__(self):
@@ -79,9 +92,17 @@ class SeevlEntity():
     # Methods and property you can call
     def api_call(self, call):
         """ Do an API call for this entity """
-        return Seevl().queryEndpoint('entity/{}/{}'.format(self.id, call))
+        return querySeevlEndpoint('entity/{}/{}'.format(self.id, call))
+    
+    ############
+    ## Infos    
+    ############
+    @property
+    def infos(self):
+        return self.api_call('infos')
 
-    @cached_property
+#    @cached_property
+    @property
     def facts(self):
         """ Return a list of facts about this entity 
         
@@ -89,15 +110,16 @@ class SeevlEntity():
         >>> bool( entity.facts )
         True
         """
-        return self._make_dict(self.api_call('facts'))
+        return self.api_call('facts')
+#        return self._make_dict(self.api_call('facts'))
 
-    
-    @cached_property
+#    @cached_property
+    @property
     def links(self):
         """ Return a list of links pointing to external sites for this entity """
         return self.api_call('links')
 
-    @cached_property
+#    @cached_property
     def related(self):
         """ Return a list of related entities
 
@@ -118,40 +140,19 @@ class SeevlEntity():
         assert isinstance(other, self.__class__)
         return [self._make_dict(i) for i in self.api_call('related/{}'.format(other.id))['data']]
 
-class Seevl(object):
-
-    def __init__(self, seevl_app_id, seevl_app_key):
-        self.app_id = seevl_app_id
-        self.app_key = seevl_app_key
-        self.endpoint = 'http://data.seevl.net'
+#########################
+### Entity search
+#########################
         
-    def queryEndpoint(self, query):
-        """ Run remote calls to the seevl endpoint """
-        ## Set URI parameters
-        try:
-            opener = urllib.request.build_opener()
-        except AttributeError:
-            opener = urllib2.build_opener()
-        opener.addheaders = [
-            ('User-Agent', 'seevl-python'), 
-            ('Accept', 'application/json'), 
-            ('X_APP_ID', self.app_id), 
-            ('X_APP_KEY', self.app_key)
-        ]
-        ## Run query
-        try:
-            request = opener.open(self.endpoint + '/' + query)
-        except HTTPError as error:
-            if error.code == 401:
-                raise IncorrectCredentials()
-            else:
-                raise error
-        ## Get JSON data
-        response = request.read().decode()
-        return json.loads(response)
+class SeevlEntitySearch(object):
+            
+    def __init__(self, filters):
+        self.filters = filters
         
-    def query(self, query):
+    def run(self):
         """
+    Run a search query over the seevl endpoint.
+    
     This function takes a dictionnary of "filters" as parameter, and return a list of entities.
 
     >>> entities = search_by_name('pendulum')
@@ -160,21 +161,35 @@ class Seevl(object):
     >>> len(  search( {'genre': Entity('A2FtdpRA')} )  ) > 0
     True
     """
-
-        try:
-            query_string = urllib.parse.urlencode(query)
-        except AttributeError:
-            query_string = urllib.urlencode(query)    
-        result = self.queryEndpoint('entity/?' + query_string)
-        
+        result = querySeevlEndpoint('entity/?' + urllib_parse.urlencode(self.filters))
         return [SeevlEntity(values) for values in result['results']] if result.get('results') else []
+    
+#########################
+### Helper methods
+#########################
 
+def querySeevlEndpoint(query):
+    """ Run remote calls to the seevl endpoint """
+    
+    from django.conf import settings
+    
+    SEEVL_APP_ID = settings.SEEVL_APP_ID
+    SEEVL_APP_KEY = settings.SEEVL_APP_KEY
+    ENDPOINT = 'http://data.seevl.net/'
 
-    def search_by_name(self, name):
-        return self.query({
-            'prefLabel': name
-        })
+    opener = urllib_request.build_opener()
+    opener.addheaders = [
+        ('User-Agent', 'seevl-python'), 
+        ('Accept', 'application/json'), 
+        ('X_APP_ID', SEEVL_APP_ID), 
+        ('X_APP_KEY', SEEVL_APP_KEY)
+    ]
+    ## Run query
+    try:
+        request = opener.open(ENDPOINT + query)
+    except HTTPError as error:
+        raise SeevlError(error)
 
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
+    ## Get JSON data
+    response = request.read().decode()
+    return json.loads(response)
