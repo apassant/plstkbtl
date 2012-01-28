@@ -33,7 +33,7 @@ def upload(request):
       # return the URL
       return HttpResponse('/image/%s' % qid)
     else:
-      return HttpResponseRedirect('/image/')
+      return HttpResponseRedirect('/')
   except Exception, e:
     print `e`
 

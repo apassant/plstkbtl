@@ -9,10 +9,10 @@
 
 <script language="JavaScript">
   webcam.set_swf_url('/static/webcam.swf');
-  webcam.set_shutter_sound('/static/shutter.mp3');
-  document.write( webcam.get_html(320, 240) );
-  webcam.set_api_url( '/upload/' );
-  webcam.set_hook( 'onComplete', 'my_callback_function' );
+  webcam.set_shutter_sound(true, '/static/shutter.mp3');
+  document.write(webcam.get_html(320, 240));
+  webcam.set_api_url('/upload/');
+  webcam.set_hook('onComplete', 'my_callback_function');
   function my_callback_function(response) {
     window.location.href=response;
   }
