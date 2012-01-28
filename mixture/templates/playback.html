@@ -8,5 +8,33 @@
 <p>Let's play {{ track.artist }} / {{ track.name }}</p>
 <iframe width="1" height="1" src="{{ track.embedUrl }}?autoplay=true"></iframe>
 
+<h2>About {{ artist.prefLabel }}</h2>
+{% autoescape off %}
+{{ artist.infos.description.value }}
+{% endautoescape %}
+{% if artist.thumbnail %}<img src="{{ artist.thumbnail.uri }}"/>{% endif %}
+
+<h3>Genre(s)</h3>
+<ul>{% for g in artist.facts.genre %}
+<li>{{ g.prefLabel }}</li>
+{% endfor %}</ul>
+
+<h3>Origin(s)</h3>
+<ul>{% for o in artist.facts.origin %}
+<li>{{ o.prefLabel }}</li>
+{% endfor %}</ul>
+
+<h3>Label(s)</h3>
+<ul>{% for l in artist.facts.label %}
+<li>{{ l.prefLabel }}</li>
+{% endfor %}</ul>
+
+
+<h3>Members(s)</h3>
+<ul>{% for m in artist.facts.membership.artist %}
+<li>{{ m.prefLabel }}</li>
+{% endfor %}</ul>
+
+
 </body>
 </html>
