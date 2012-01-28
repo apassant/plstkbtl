@@ -11,6 +11,12 @@ def playback(request):
   artist = request.REQUEST.get('artist', '')
   track = request.REQUEST.get('track', '')
 
+  q = {
+      'types':'track',
+      'query': u"%s %s" %(artist.decode('latin-1'), track.decode('latin-1'))
+    }
+  print 'Q=%r' % q
+
   response = rdio.call('search', {
     'types':'track',
     'query': u"%s %s" %(artist.decode('latin-1'), track.decode('latin-1'))
