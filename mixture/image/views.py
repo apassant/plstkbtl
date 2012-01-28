@@ -30,6 +30,6 @@ def poll(request, qid):
   result = iqe.result(qid)
   data = result['data']
   if 'results' in data:
-    return HttpResponseRedirect('/play/'+data['results']['labels'])
+    return HttpResponseRedirect('/tracks/'+data['results']['labels'])
   else:
     return render_to_response('poll.html', csrf(request))

@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^image/(....+)', 'image.views.poll'),
     url(r'^playback/', 'playback.views.playback'),
     url(r'^image/', 'image.views.index'),
-    url(r'^play/(?P<terms>[\w.\+_:-]+)+', 'song.views.index'),
+    url(r'^tracks/(?P<terms>[\w.\+_:-]+)+', 'song.views.index'),
 )
