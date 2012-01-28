@@ -61,13 +61,15 @@ except ImportError: # Python 2
 
 class SeevlEntity():
 
-    def __init__(self, values):
+    def __init__(self, values, seevl_app_id=False, seevl_app_key=False):
         self.uri = values['uri']
         self.id = values['id']
         self.prefLabel = values['prefLabel']
         self.description = values['description'] if values.get('description') else False
         self.thumbnail = values['thumbnail'] if values.get('thumbnail') else False
         self.depiction = values['depiction'] if values.get('depiction') else False
+        self.seevl_app_id = seevl_app_id
+        self.seevl_app_key = seevl_app_key
 
     def __eq__(self, other):
         return self.uri == other.uri
@@ -84,7 +86,7 @@ class SeevlEntity():
         d = {}
         for name, value in data.items():
             if isinstance(value, list) and len(value) > 0 and 'id' in value[0]:
-                d[name] = [SeevlEntity(v) for v in value]
+                d[name] = [SeevlEntity(v, self.seevl_app_id, self.seevl_app_key) for v in value]
             else:
                 d[name] = value
         return d
@@ -92,7 +94,7 @@ class SeevlEntity():
     # Methods and property you can call
     def api_call(self, call):
         """ Do an API call for this entity """
-        return querySeevlEndpoint('entity/{}/{}'.format(self.id, call))
+        return querySeevlEndpoint('entity/{}/{}'.format(self.id, call), self.seevl_app_id, self.seevl_app_key)
     
     ############
     ## Infos    
@@ -146,8 +148,10 @@ class SeevlEntity():
         
 class SeevlEntitySearch(object):
             
-    def __init__(self, filters):
+    def __init__(self, filters, seevl_app_id=False, seevl_app_key=False):
         self.filters = filters
+        self.seevl_app_id = seevl_app_id
+        self.seevl_app_key = seevl_app_key
         
     def run(self):
         """
@@ -161,21 +165,19 @@ class SeevlEntitySearch(object):
     >>> len(  search( {'genre': Entity('A2FtdpRA')} )  ) > 0
     True
     """
-        result = querySeevlEndpoint('entity/?' + urllib_parse.urlencode(self.filters))
-        return [SeevlEntity(values) for values in result['results']] if result.get('results') else []
+        result = querySeevlEndpoint('entity/?' + urllib_parse.urlencode(self.filters), self.seevl_app_id, self.seevl_app_key)
+        return [SeevlEntity(values, self.seevl_app_id, self.seevl_app_key) for values in result['results']] if result.get('results') else []
     
 #########################
 ### Helper methods
 #########################
 
-def querySeevlEndpoint(query):
+def querySeevlEndpoint(query, seevl_app_id=False, seevl_app_key=False):
     """ Run remote calls to the seevl endpoint """
     
-    from django.conf import settings
-    
-    SEEVL_APP_ID = settings.SEEVL_APP_ID
-    SEEVL_APP_KEY = settings.SEEVL_APP_KEY
-    ENDPOINT = 'http://data.seevl.net/'
+    SEEVL_APP_ID = seevl_app_id if seevl_app_id else os.environ.get('SEEVL_APP_ID', False)
+    SEEVL_APP_KEY = seevl_app_key if seevl_app_key else os.environ.get('SEEVL_APP_KEY', False)
+    SEEVL_ENDPOINT = os.environ.get('SEEVL_ENDPOINT', 'http://data.seevl.net/')
 
     opener = urllib_request.build_opener()
     opener.addheaders = [
@@ -184,9 +186,10 @@ def querySeevlEndpoint(query):
         ('X_APP_ID', SEEVL_APP_ID), 
         ('X_APP_KEY', SEEVL_APP_KEY)
     ]
+    
     ## Run query
     try:
-        request = opener.open(ENDPOINT + query)
+        request = opener.open(SEEVL_ENDPOINT + query)
     except HTTPError as error:
         raise SeevlError(error)
 

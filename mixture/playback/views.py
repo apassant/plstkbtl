@@ -16,7 +16,7 @@ def playback(request):
     'query': "%s %s" %(artist, track)
   })
   
-  seevlArtist = SeevlEntitySearch({'prefLabel' : artist}).run()[0]
+  seevlArtist = SeevlEntitySearch({'prefLabel' : artist}, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()[0]
   
   context = {
     'track': response['result']['results'][0],
