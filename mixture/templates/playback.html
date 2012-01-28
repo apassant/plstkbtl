@@ -19,9 +19,20 @@
 <li>{{ g.prefLabel }}</li>
 {% endfor %}</ul>
 
+<h3>Origin(s)</h3>
+<ul>{% for o in artist.facts.origin %}
+<li>{{ o.prefLabel }}</li>
+{% endfor %}</ul>
+
 <h3>Label(s)</h3>
 <ul>{% for l in artist.facts.label %}
 <li>{{ l.prefLabel }}</li>
+{% endfor %}</ul>
+
+
+<h3>Members(s)</h3>
+<ul>{% for m in artist.facts.membership.artist %}
+<li>{{ m.prefLabel }}</li>
 {% endfor %}</ul>
 
 
