@@ -11,6 +11,8 @@ def playback(request):
   artist = request.REQUEST.get('artist', '')
   track = request.REQUEST.get('track', '')
 
+  print 'artist=%r track=%r' % (artist, track)
+
   q = {
       'types':'track',
       'query': u"%s %s" %(artist.decode('latin-1'), track.decode('latin-1'))
