@@ -6,7 +6,6 @@ from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 from django.conf import settings
 
 # Create your models here.
-
 class MusixMatch(object):
 
     def __init__(self):
@@ -31,6 +30,5 @@ class MusixMatch(object):
             'lyrics' : track.lyrics()['lyrics_body']
         
         }
+
         
-    def getLyrics(self, track):
-        return TRACK.Track(track).lyrics()['lyrics_body']
