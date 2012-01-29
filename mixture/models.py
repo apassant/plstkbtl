@@ -22,12 +22,12 @@ class Mixture(object):
         return filter(lambda x: 
             len(SeevlEntitySearch({
                 'prefLabel' : x.artist_name.encode('utf-8')
-            }, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()),
+            }, api_credentials = (settings.SEEVL_APP_ID, settings.SEEVL_APP_KEY)).run()),
             tracks)
             
     def getTrack(self, mxmid):
 
-        from dependencies.musixmatch.musixmatch import track as TRACK        
+        from dependencies.musixmatch.musixmatch import track as TRACK
         track = TRACK.Track(mxmid)        
 
         ## Get Rdio link
@@ -40,7 +40,7 @@ class Mixture(object):
         ## Get seevl data
         seevlArtist = SeevlEntitySearch({
           'prefLabel' : track.artist_name
-        }, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()[0]
+        }, api_credentials = (settings.SEEVL_APP_ID, settings.SEEVL_APP_KEY)).run()[0]
                 
         return {
             'name' : track.track_name,
