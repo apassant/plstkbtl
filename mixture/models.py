@@ -15,7 +15,7 @@ class Mixture(object):
         """Get tracks matching a query term"""
         ## Need to do the import here to be sure the environment var is set        
         from musixmatch import track as TRACK
-        return self.filterTracks(TRACK.search(q=query, page_size=10))
+        return self.filterTracks(TRACK.search(q=query, page_size=20))
 
     def filterTracks(self, tracks):
         """Filter to get only tracks with artist matching in seevl"""
