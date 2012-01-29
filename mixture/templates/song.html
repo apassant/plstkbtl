@@ -12,7 +12,9 @@
 </ul>
 </div>
 
-<iframe width="600" height="800" src="/play/{{ tracks.0.track_id}}" id="player"></iframe>
+{{ tracks|random }}
+
+<iframe width="600" height="800" src="/play/{{ tracks|random }}" id="player"></iframe>
 
 <script>
 $('.play').click(function() {
