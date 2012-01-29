@@ -85,3 +85,34 @@ body {
 body.two {
   background: #cccccc;
 }
+
+#camholder {
+  margin-top: 40px;
+  background-color: #eee;
+  margin-left: auto;
+  margin-right: auto;
+  width: 435px;
+  padding: 10px;
+  border: 1px solid #666666;
+  border-radius: 3px;
+  text-align: center;
+
+  background-color: #d2d2d2;
+  background: -moz-linear-gradient(top, #f2f2f2,  #d2d2d2);
+  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#d2d2d2));
+}
+
+#capture {
+  margin-top: 10px;
+  padding: 15px 100px;
+  background-color: #eb2950;
+  background: -moz-linear-gradient(top, #ef5272,  #eb2950);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ef5272), to(#eb2950));
+  color: #EDEDED;
+  text-shadow: 0 -0.35mm rgba(0,0,0,0.25);
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  font-size: 16pt;
+
+}

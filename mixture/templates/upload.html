@@ -5,17 +5,21 @@
 {% endblock %}
 
 {% block body %}
-<h1>Take a picture</h1>
 
 <script language="JavaScript">
   webcam.set_swf_url('/static/webcam.swf');
   webcam.set_shutter_sound(true, '/static/shutter.mp3');
-  document.write(webcam.get_html(320, 240));
+
   webcam.set_api_url('/upload/');
   webcam.set_hook('onComplete', 'my_callback_function');
   function my_callback_function(response) {
     window.location.href=response;
   }
 </script>
-<a href="javascript:void(webcam.snap())">Take Snapshot</a>
+  <div id="camholder">
+    <div id="camera"><script>document.write(webcam.get_html(435, 325));</script></div>
+    <button onclick="webcam.snap()" id="capture">Capture!</button>
+  </div>
+
+  </div>
 {% endblock %}
