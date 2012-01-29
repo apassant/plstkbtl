@@ -116,3 +116,10 @@ body.two {
   font-size: 16pt;
 
 }
+
+#mixmessage {
+  color: #eb2950;
+  text-shadow: 0 1px #fff;
+  font-size: 20pt;
+  font-weight: bold;
+}
