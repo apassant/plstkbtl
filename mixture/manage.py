@@ -3,7 +3,9 @@ from django.core.management import execute_manager
 import imp
 
 import sys,os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'dependencies/musixmatch'))
+dependencies = os.path.join(os.path.dirname(__file__), 'dependencies')
+sys.path.append(os.path.join(dependencies, 'musixmatch'))
+sys.path.append(os.path.join(dependencies, 'pyiqe'))
 
 try:
     imp.find_module('settings') # Assumed to be in the same directory.

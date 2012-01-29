@@ -27,7 +27,7 @@ class Mixture(object):
             
     def getTrack(self, mxmid):
 
-        from dependencies.musixmatch.musixmatch import track as TRACK        
+        from musixmatch import track as TRACK
         track = TRACK.Track(mxmid)        
 
         ## Get Rdio link
