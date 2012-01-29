@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^poll/(....+)', 'views.poll'),
     url(r'^play/(?P<mxmid>[\w.\+_:-]+)+', 'views.play'),
     url(r'^upload/', 'views.upload'),
+    url(r'^about', 'views.about'),
     url(r'^tracks/(?P<terms>[\w.\+_:-]+)+', 'views.tracks'),
 )

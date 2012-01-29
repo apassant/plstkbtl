@@ -27,7 +27,6 @@ def tracks(request, terms):
     'nav': 'three',
   }, context_instance=RequestContext(request))
 
-
 def play(request, mxmid):
   """Play the track given a MxM id"""
   track = Mixture().getTrack(mxmid)
@@ -36,6 +35,11 @@ def play(request, mxmid):
       'nav': 'three',
   }, context_instance=RequestContext(request))
   
+def about(request):
+  """About page """
+  return render_to_response('about.html', {
+  },context_instance=RequestContext(request))
+
   
 iqe = IQEngine('e15511587ea4414f901b9bc1dbaa444a', '46e9fc3bd4684dd6903525fd16da9b74')
 

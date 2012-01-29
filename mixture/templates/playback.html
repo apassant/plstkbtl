@@ -8,10 +8,10 @@
 
 <div id="content">
     
-<div id="context">
+<div id="left">
 <h2>About {{ track.artist.prefLabel }}</h2>
 {% autoescape off %}
-{{ track.artist.infos.description.value }}
+<div id="description">{{ track.artist.infos.description.value }}</div>
 {% endautoescape %}
 {% if artist.thumbnail %}<img src="{{ track.artist.thumbnail.uri }}"/>{% endif %}
 
@@ -36,11 +36,24 @@
 {% endfor %}</ul>
 </div>
 
-<div id="lyrics">
+<div id="right">
 <h2>Lyrics of {{ track.name }}</h2>
 {{ track.lyrics }}
 </div>
 
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#description').condense({
+        moreSpeed: 'fast',
+        lessSpeed: 'fast',
+        moreText: 'read more',
+        lessText: 'read less',
+        ellipsis: "...",
+        condensedLength: 200
+      });
+     });
+</script>
 
 {% endblock %}
