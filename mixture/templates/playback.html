@@ -2,14 +2,13 @@
 
 {% block body %}
 
-<h1>Playing {{ track.artist }} by {{ track.name }}</h1>
+<h1>{{ track.artist }} by {{ track.name }}</h1>
 
 <iframe width="400" height="30" src="{{ track.rdio.embedUrl }}?autoplay=true"></iframe>
 
-<div id="lyrics">
-{{ track.lyrics }}
-</div>
-
+<div id="content">
+    
+<div id="context">
 <h2>About {{ track.artist.prefLabel }}</h2>
 {% autoescape off %}
 {{ track.artist.infos.description.value }}
@@ -35,5 +34,13 @@
 <ul>{% for m in track.artist.facts.membership.artist %}
 <li>{{ m.prefLabel }}</li>
 {% endfor %}</ul>
+</div>
+
+<div id="lyrics">
+<h2>Lyrics of {{ track.name }}</h2>
+{{ track.lyrics }}
+</div>
+
+</div>
 
 {% endblock %}
