@@ -8,6 +8,10 @@
 <p>Let's play {{ track.artist }} / {{ track.name }}</p>
 <iframe width="400" height="30" src="{{ track.embedUrl }}?autoplay=true"></iframe>
 
+<hr/>
+{{ lyrics }}
+<hr/>
+
 <h2>About {{ artist.prefLabel }}</h2>
 {% autoescape off %}
 {{ artist.infos.description.value }}
@@ -28,7 +32,6 @@
 <ul>{% for l in artist.facts.label %}
 <li>{{ l.prefLabel }}</li>
 {% endfor %}</ul>
-
 
 <h3>Members(s)</h3>
 <ul>{% for m in artist.facts.membership.artist %}

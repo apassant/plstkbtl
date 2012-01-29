@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, redirect
 from song.models import MusixMatch
 
 def index(request, terms):
-    m = MusixMatch(terms)
+    tracks = MusixMatch().getTracks(terms)
     return render_to_response("song.html", {
-        'tracks': m.tracks,
+        'tracks': tracks,
     }, context_instance=RequestContext(request))
