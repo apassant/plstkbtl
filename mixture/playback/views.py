@@ -2,7 +2,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render_to_response
 
-from seevl import SeevlEntitySearch
+#from dependencies.seevl.seevl.seevl import SeevlEntitySearch
+from dependencies.seevl.seevl.seevl import SeevlEntitySearch
+
 from rdio import Rdio
 
 from song.models import MusixMatch
@@ -17,7 +19,7 @@ def playback(request, mxmid):
     'types':'track',
     'query': "%s %s" %(track['artist'], track['title'])
   })
-  
+
   seevlArtist = SeevlEntitySearch({
     'prefLabel' : track['artist']
   }, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()[0]

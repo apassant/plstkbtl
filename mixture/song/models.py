@@ -1,12 +1,8 @@
 from django.db import models
 
-import musixmatch
+from dependencies.musixmatch.musixmatch import track as TRACK
+from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 
-from musixmatch import track as TRACK
-from musixmatch import artist as ARTIST
-from musixmatch import tracking as TRACKING
-
-from seevl.seevl import SeevlEntitySearch
 from django.conf import settings
 
 # Create your models here.
