@@ -29,10 +29,10 @@ h1, h2, h3 {
     font-weight: bold;
 }
 h1 {
-    font-size: 22pt;
+    font-size: 28pt;
 }
 h2 {
-    font-size: 28pt;
+    font-size: 22pt;
 }
 h3 {
     font-size: 14pt;
@@ -135,4 +135,8 @@ body.two {
   text-shadow: 0 1px #fff;
   font-size: 20pt;
   font-weight: bold;
+}
+
+#lyrics {
+    white-space: pre-line;
 }
