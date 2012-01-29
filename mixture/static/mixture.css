@@ -154,3 +154,18 @@ body.two {
     padding: 10px;
 }
 
+#footer {
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 80%;
+    color: #666;
+    border-top: 1px solid #666;
+}
+#footer a {
+    color: #666;
+}
+#footer a:hover {
+    text-decoration: none;
+}
+
+
