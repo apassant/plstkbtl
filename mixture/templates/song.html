@@ -12,6 +12,15 @@
 </ul>
 </div>
 
-<iframe width="600" height="800" src="/play/{{ tracks.0.track_id}}"></iframe>
+<iframe width="600" height="800" src="/play/{{ tracks.0.track_id}}" id="player"></iframe>
+
+<script>
+$('.play').click(function() {
+    var id = $(this).attr('id');
+    alert(id)
+    $('#player').attr('src', '/play/' + id);
+    return false;
+});
+</script>
 
 {% endblock %}
