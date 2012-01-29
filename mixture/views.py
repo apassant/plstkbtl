@@ -13,7 +13,7 @@ from mixture.models import MusixMatch
 
 from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 from dependencies.rdio.rdio import Rdio
-from dependencies.pyiqe.pyiqe import Api as IQEngine
+from pyiqe import Api as IQEngine
 
 import os
 

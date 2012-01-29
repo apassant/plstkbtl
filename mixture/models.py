@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from dependencies.musixmatch.musixmatch import track as TRACK
+from musixmatch import track as TRACK
 from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 
 class MusixMatch(object):
