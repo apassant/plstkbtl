@@ -11,17 +11,11 @@ def playback(request):
   artist = request.REQUEST.get('artist', '')
   track = request.REQUEST.get('track', '')
 
-  print 'artist=%r track=%r' % (artist, track)
-
-  q = {
-      'types':'track',
-      'query': u"%s %s" %(artist.decode('latin-1'), track.decode('latin-1'))
-    }
-  print 'Q=%r' % q
+  print 'artist=%r track=%r'.encode() % (artist, track)
 
   response = rdio.call('search', {
     'types':'track',
-    'query': u"%s %s" %(artist.decode('latin-1'), track.decode('latin-1'))
+    'query': u"%s %s" %(artist, track)
   })
   
   seevlArtist = SeevlEntitySearch({'prefLabel' : artist}, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()[0]
