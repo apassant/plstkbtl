@@ -81,3 +81,7 @@ body {
 #nav.three #edge-right {
   background-image: url(/static/nav-hi-right.png);
 }
+
+body.two {
+  background: #cccccc;
+}

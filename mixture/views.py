@@ -14,6 +14,7 @@ from mixture.models import Mixture
 from pyiqe import Api as IQEngine
 from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 from dependencies.rdio.rdio import Rdio
+import json
 
 import os
 
@@ -23,6 +24,7 @@ def tracks(request, terms):
   tracks = Mixture().getTracks(terms)
   return render_to_response("song.html", {
     'tracks': tracks,
+    'nav': 'three',
   }, context_instance=RequestContext(request))
 
 
@@ -30,7 +32,8 @@ def play(request, mxmid):
   """Play the track given a MxM id"""
   track = Mixture().getTrack(mxmid)
   return render_to_response('playback.html', {
-      'track' : track
+      'track' : track,
+      'nav': 'three',
   }, context_instance=RequestContext(request))
   
   
@@ -40,7 +43,7 @@ class UploadFileForm(forms.Form):
   file = forms.FileField()
 
 def index(request):
-  return render_to_response('upload.html', {})
+  return render_to_response('upload.html', {'nav': 'one'})
 
 @csrf_exempt
 def upload(request):
@@ -53,17 +56,19 @@ def upload(request):
       print path
       open(path, 'w').write(imgdata)
       # return the URL
-      return HttpResponse('/image/%s' % qid)
+      return HttpResponse('/process/%s' % qid)
     else:
       return HttpResponseRedirect('/')
   except Exception, e:
     print `e`
 
-def poll(request, qid):
-  result = iqe.result(qid)
-  data = result['data']
-  if 'results' in data:
-    return HttpResponseRedirect('/tracks/'+data['results']['labels'])
-  else:
-    return render_to_response('poll.html', csrf(request))
+def process(request, qid):
+  return render_to_response('poll.html', {'nav': 'two', 'qid': qid})
 
+def poll(request, qid):
+    result = iqe.result(qid)
+    data = result['data']
+    response_obj = None
+    if 'results' in data:
+      response_obj = data['results']['labels']
+    return HttpResponse(json.dumps(response_obj), mimetype='application/json')

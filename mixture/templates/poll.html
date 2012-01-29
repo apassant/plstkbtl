@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Waiting</title>
-  <meta http-equiv="refresh" content="1">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Mixturing{% endblock %}
+{% block head %}
+  <script>
+  $(document).ready(function() {
+    setInterval(function() {
+      $.ajax({
+        type: 'GET',
+     	url: '/poll/{{ qid }}',
+        dataType: 'json',
+        success: function (result) {
+          if (result) {
+            window.location.href = '/tracks/'+encodeURIComponent(result)+'?qid={{ qid }}'
+          }
+        }
+      })
+    }, 1000)
+  });
+  </script>
+{% endblock %}
 
-<p>Analyzing the image</p>
-
-</body>
-</html>
+{% block body %}
+<div style="text-align:center">
+<br><br><br>
+<img src="/static/mixture.gif">
+</div>
+{% endblock %}
