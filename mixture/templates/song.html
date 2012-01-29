@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Select a track{% endblock %}
+
+{% block body %}
+<h1>Select a track</h1>
 
 <ul>
 {% for track in tracks %}
@@ -21,3 +26,5 @@ $(".play").click(function() {
     return false;
 });
 </script>
+
+{% endblock %}

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Playing</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Playing {{ track.artist }} by {{ track.name }}{% endblock %}
 
-<p>Let's play {{ track.artist }} / {{ track.name }}</p>
+{% block body %}
+
+<h1>Playing {{ track.artist }} by {{ track.name }}</h1>
+
 <iframe width="400" height="30" src="{{ track.rdio.embedUrl }}?autoplay=true"></iframe>
 
 <hr/>
@@ -38,6 +37,4 @@
 <li>{{ m.prefLabel }}</li>
 {% endfor %}</ul>
 
-
-</body>
-</html>
+{% endblock %}
