@@ -1,0 +1,83 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background-color: #cccccc;
+  /* 9b9c9f */
+  background: -moz-linear-gradient(top, #9b9c9f,  #cccccc);
+  background: -webkit-gradient(linear, left top, left bottom, from(#9b9c9f), to(#cccccc));
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Helvetica Neue Light", Helvetica, sans-serif;
+}
+
+
+#header {
+  height: 100px;
+  background-image: url(/static/header_texture.png);
+  text-align: center;
+}
+#header img {
+  margin-top: 12px;
+}
+
+#nav {
+  height: 25px;
+  border-top: 1px solid #696969;
+  border-bottom: 1px solid #474747;
+}
+
+#nav, .segment {
+  background-color: #808181;
+  background: -moz-linear-gradient(top, #a4a7aa,  #808181);
+  background: -webkit-gradient(linear, left top, left bottom, from(#a4a7aa), to(#808181));
+}
+
+.edge {
+  width: 12px;
+  height: 25px;
+  float: right;
+  margin-right: -5px;
+  background-image: url(/static/nav.png);
+}
+
+#nav > .segment {
+  display: inline-block;
+  width: 33%;
+  height: 25px;
+  line-height: 25px;
+  font-size: 12pt;
+  color: #4D4D4D;
+  text-shadow: 0 0.35mm rgba(255,255,255,0.25);
+}
+
+#nav > div > span {
+  padding-left: 10px;
+}
+
+#nav.one #nav-one, #nav.two #nav-two, #nav.three #nav-three, #nav.three {
+  background-color: #eb2950;
+  background: -moz-linear-gradient(top, #ef5272,  #eb2950);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ef5272), to(#eb2950));
+  color: #EDEDED;
+  text-shadow: 0 -0.35mm rgba(0,0,0,0.25);
+}
+
+#nav.one #edge-left {
+  background-image: url(/static/nav-hi-left.png);
+}
+
+#nav.two #edge-left {
+  background-image: url(/static/nav-hi-right.png);
+}
+#nav.two #edge-right {
+  background-image: url(/static/nav-hi-left.png);
+}
+
+#nav.three #edge-right {
+  background-image: url(/static/nav-hi-right.png);
+}
