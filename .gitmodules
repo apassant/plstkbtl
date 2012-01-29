@@ -1,0 +1,9 @@
+[submodule "mixture/dependencies/musixmatch"]
+	path = mixture/dependencies/musixmatch
+	url = https://github.com/utstikkar/pyMusiXmatch.git
+[submodule "dependencies/seevl"]
+	path = dependencies/seevl
+	url = https://github.com/seevl/seevl-python.git
+[submodule "mixture/dependencies/seevl"]
+	path = mixture/dependencies/seevl
+	url = https://github.com/seevl/seevl-python.git
