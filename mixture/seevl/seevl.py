@@ -165,7 +165,7 @@ class SeevlEntitySearch(object):
     >>> len(  search( {'genre': Entity('A2FtdpRA')} )  ) > 0
     True
     """
-        result = querySeevlEndpoint('entity/?' + urllib_parse.urlencode(self.filters), self.seevl_app_id, self.seevl_app_key)
+        result = querySeevlEndpoint('entity/?' + urllib_parse.urlencode(dict([k, v.encode('utf-8')] for k, v in self.filters.items())), self.seevl_app_id, self.seevl_app_key)
         return [SeevlEntity(values, self.seevl_app_id, self.seevl_app_key) for values in result['results']] if result.get('results') else []
     
 #########################
