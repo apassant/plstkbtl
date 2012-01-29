@@ -14,7 +14,7 @@
 
 {{ tracks|random }}
 
-<iframe width="600" height="800" src="/play/{{ tracks|random }}" id="player"></iframe>
+<iframe width="600" height="800" src="/play/{{ random.track_id }}" id="player"></iframe>
 
 <script>
 $('.play').click(function() {

@@ -14,16 +14,18 @@ from mixture.models import Mixture
 from pyiqe import Api as IQEngine
 from dependencies.seevl.seevl.seevl import SeevlEntitySearch
 from dependencies.rdio.rdio import Rdio
+
 import json
-
 import os
-
+from random import choice
 
 def tracks(request, terms):
   """Get list of tracks mathching the query terms"""
   tracks = Mixture().getTracks(terms)
+  random = choice(tracks)
   return render_to_response("song.html", {
     'tracks': tracks,
+    'random' : random,
     'nav': 'three',
   }, context_instance=RequestContext(request))
 
