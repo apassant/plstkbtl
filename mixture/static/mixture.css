@@ -15,7 +15,6 @@ body {
   font-family: "Helvetica Neue Light", Helvetica, sans-serif;
 }
 
-
 #header {
   height: 100px;
   background-image: url(/static/header_texture.png);
@@ -23,6 +22,20 @@ body {
 }
 #header img {
   margin-top: 12px;
+}
+
+h1, h2, h3 {
+    color: #eb2950;
+    font-weight: bold;
+}
+h1 {
+    font-size: 22pt;
+}
+h2 {
+    font-size: 28pt;
+}
+h3 {
+    font-size: 14pt;
 }
 
 #nav {

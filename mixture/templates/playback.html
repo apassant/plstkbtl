@@ -1,3 +1,7 @@
+{% extends "frame.html" %}
+
+{% block body %}
+
 <h1>Playing {{ track.artist }} by {{ track.name }}</h1>
 
 <iframe width="400" height="30" src="{{ track.rdio.embedUrl }}?autoplay=true"></iframe>
@@ -31,3 +35,5 @@
 <ul>{% for m in track.artist.facts.membership.artist %}
 <li>{{ m.prefLabel }}</li>
 {% endfor %}</ul>
+
+{% endblock %}
