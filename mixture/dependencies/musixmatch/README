@@ -1,0 +1,31 @@
+README
+------
+README FOR PYMUSIXMATCH PROJECT
+
+by Amelie Anglade and Thierry Bertin-Mahieux
+   amelie.anglade@gmail.com & tb2332@columbia.edu
+   February 2011
+
+DESCRIPTION
+----
+Python wrapper around MusixMatch API:
+http://developer.musixmatch.com
+Can make all the calls described in the documentation as of 03/2011
+
+INSTALL
+-------
+* get an API key, put it in your environment variable: MUSIXMATCH_API_KEY
+* python setup.py build
+  python setup.py install
+* in python: import musixmatch
+That's it!
+
+LICENSE
+-------
+See LICENSE, but it is GPL
+
+
+QUESTIONS
+---------
+Questions and comments should be adressed to:
+Amelie Anglade < amelie.anglade@gmail.com >
