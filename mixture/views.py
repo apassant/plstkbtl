@@ -1,38 +1,35 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.conf import settings
 
+from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django import forms
+
 from mixture.models import MusixMatch
 
 from dependencies.seevl.seevl.seevl import SeevlEntitySearch
-
 from dependencies.rdio.rdio import Rdio
+from dependencies.pyiqe.pyiqe import Api as IQEngine
 
-# Create your views here.
-from django.core.context_processors import csrf
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.http import HttpResponse, HttpResponseRedirect
-from django import forms
-from django.shortcuts import render_to_response
 import os
 
-from pyiqe import Api as IQEngine
-from django.views.decorators.csrf import csrf_exempt
-
 def tracks(request, terms):
+  """Get list of tracks mathching the query terms"""
   tracks = MusixMatch().getTracks(terms)
   return render_to_response("song.html", {
     'tracks': tracks,
   }, context_instance=RequestContext(request))
 
-def playback(request, mxmid):
-
-  rdio = Rdio((settings.RDIO_KEY, settings.RDIO_SECRET))
-  print rdio
+def play(request, mxmid):
+  """Play the track given a MxM id"""
 
   assert(mxmid)
+  rdio = Rdio((settings.RDIO_KEY, settings.RDIO_SECRET))
+ 
   track = MusixMatch().getTrack(mxmid)
   response = rdio.call('search', {
     'types':'track',
@@ -56,10 +53,8 @@ iqe = IQEngine('e15511587ea4414f901b9bc1dbaa444a', '46e9fc3bd4684dd6903525fd16da
 class UploadFileForm(forms.Form):
   file = forms.FileField()
 
-
 def index(request):
   return render_to_response('upload.html', {})
-
 
 @csrf_exempt
 def upload(request):
