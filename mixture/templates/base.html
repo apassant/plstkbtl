@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="/static/mixture.css">
+{% block head %}
+{% endblock %}
+</head>
+<body>
+  <div id="header"><img src="/static/mixture_logo.png"></div>
+  <div id="nav" class="one">
+    <div class="segment" id="nav-one">
+      <span>1. Choose a picture</span>
+      <div class="edge" id="edge-left"></div>
+    </div>
+    <div class="segment" id="nav-two">
+      <span>2. Mixturing</span>
+      <div class="edge" id="edge-right"></div>
+    </div>
+    <div class="segment" id="nav-three">
+      <span>3. Enjoy</span>
+    </div>
+  </div>
+  <div id="container">
+    {% block body %}
+    {% endblock %}
+  </div>
+</body>
+</html>

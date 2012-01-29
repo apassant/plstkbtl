@@ -12,6 +12,8 @@ from django import forms
 from mixture.models import Mixture
 
 from dependencies.pyiqe.pyiqe import Api as IQEngine
+from dependencies.seevl.seevl.seevl import SeevlEntitySearch
+from dependencies.rdio.rdio import Rdio
 
 import os
 

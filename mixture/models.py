@@ -14,7 +14,7 @@ class Mixture(object):
     def getTracks(self, query):
         """Get tracks matching a query term"""
         ## Need to do the import here to be sure the environment var is set        
-        from dependencies.musixmatch.musixmatch import track as TRACK
+        from musixmatch import track as TRACK
         return self.filterTracks(TRACK.search(q=query, page_size=10))
 
     def filterTracks(self, tracks):

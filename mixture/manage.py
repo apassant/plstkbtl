@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 from django.core.management import execute_manager
 import imp
+
+import sys,os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'dependencies/musixmatch'))
+
 try:
     imp.find_module('settings') # Assumed to be in the same directory.
 except ImportError:

@@ -32,7 +32,8 @@ class Rdio:
 
   def __signed_post(self, url, params):
     auth = om(self.__consumer, url, params, self.token)
-    req = urllib2.Request(url, urllib.urlencode(params), {'Authorization': auth})
+    req = urllib2.Request(url, urllib.urlencode(dict([k, v.encode('utf-8')] for k, v in params.items())),
+        {'Authorization': auth})
     res = urllib2.urlopen(req)
     return res.read()
 

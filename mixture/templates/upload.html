@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Upload an image</title>
+{% extends "base.html" %}
+{% block title %}Upload an image{% endblock %}
+{% block head %}
   <script src="/static/webcam.js"></script>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
 <h1>Take a picture</h1>
 
 <script language="JavaScript">
@@ -18,7 +18,4 @@
   }
 </script>
 <a href="javascript:void(webcam.snap())">Take Snapshot</a>
-
-
-</body>
-</html>
+{% endblock %}
