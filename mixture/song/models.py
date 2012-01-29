@@ -27,5 +27,14 @@ class MusixMatch(object):
             }, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()),
             tracks)
     
+    def getTrack(self, track):
+        track = TRACK.Track(track)
+        return {
+            'artist' : track.artist_name,
+            'title' : track.track_name,
+            'lyrics' : track.lyrics()['lyrics_body']
+        
+        }
+        
     def getLyrics(self, track):
         return TRACK.Track(track).lyrics()['lyrics_body']

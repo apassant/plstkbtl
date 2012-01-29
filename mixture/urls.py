@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^image/(....+)', 'image.views.poll'),
-    url(r'^playback/', 'playback.views.playback'),
+    url(r'^play/(?P<mxmid>[\w.\+_:-]+)+', 'playback.views.playback'),
     url(r'^$', 'image.views.index'),
     url(r'^upload/', 'image.views.upload'),
     url(r'^tracks/(?P<terms>[\w.\+_:-]+)+', 'song.views.index'),
