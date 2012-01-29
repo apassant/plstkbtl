@@ -9,44 +9,28 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django import forms
 
-from mixture.models import MusixMatch
+from mixture.models import Mixture
 
-from dependencies.seevl.seevl.seevl import SeevlEntitySearch
-from dependencies.rdio.rdio import Rdio
 from dependencies.pyiqe.pyiqe import Api as IQEngine
 
 import os
 
+
 def tracks(request, terms):
   """Get list of tracks mathching the query terms"""
-  tracks = MusixMatch().getTracks(terms)
+  tracks = Mixture().getTracks(terms)
   return render_to_response("song.html", {
     'tracks': tracks,
   }, context_instance=RequestContext(request))
 
+
 def play(request, mxmid):
   """Play the track given a MxM id"""
-
-  assert(mxmid)
-  rdio = Rdio((settings.RDIO_KEY, settings.RDIO_SECRET))
- 
-  track = MusixMatch().getTrack(mxmid)
-  response = rdio.call('search', {
-    'types':'track',
-    'query': "%s %s" %(track['artist'], track['title'])
-  })
-
-  seevlArtist = SeevlEntitySearch({
-    'prefLabel' : track['artist']
-  }, seevl_app_id = settings.SEEVL_APP_ID, seevl_app_key = settings.SEEVL_APP_KEY).run()[0]
-
-  context = {
-    'track': response['result']['results'][0],
-    'artist' : seevlArtist,
-    'lyrics' : track['lyrics']
-  }
-
-  return render_to_response('playback.html', context)
+  track = Mixture().getTrack(mxmid)
+  return render_to_response('playback.html', {
+      'track' : track
+  }, context_instance=RequestContext(request))
+  
   
 iqe = IQEngine('e15511587ea4414f901b9bc1dbaa444a', '46e9fc3bd4684dd6903525fd16da9b74')
 

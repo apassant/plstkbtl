@@ -6,35 +6,35 @@
 <body>
 
 <p>Let's play {{ track.artist }} / {{ track.name }}</p>
-<iframe width="400" height="30" src="{{ track.embedUrl }}?autoplay=true"></iframe>
+<iframe width="400" height="30" src="{{ track.rdio.embedUrl }}?autoplay=true"></iframe>
 
 <hr/>
-{{ lyrics }}
+{{ track.lyrics }}
 <hr/>
 
-<h2>About {{ artist.prefLabel }}</h2>
+<h2>About {{ track.artist.prefLabel }}</h2>
 {% autoescape off %}
-{{ artist.infos.description.value }}
+{{ track.artist.infos.description.value }}
 {% endautoescape %}
-{% if artist.thumbnail %}<img src="{{ artist.thumbnail.uri }}"/>{% endif %}
+{% if artist.thumbnail %}<img src="{{ track.artist.thumbnail.uri }}"/>{% endif %}
 
 <h3>Genre(s)</h3>
-<ul>{% for g in artist.facts.genre %}
+<ul>{% for g in track.artist.facts.genre %}
 <li>{{ g.prefLabel }}</li>
 {% endfor %}</ul>
 
 <h3>Origin(s)</h3>
-<ul>{% for o in artist.facts.origin %}
+<ul>{% for o in track.artist.facts.origin %}
 <li>{{ o.prefLabel }}</li>
 {% endfor %}</ul>
 
 <h3>Label(s)</h3>
-<ul>{% for l in artist.facts.label %}
+<ul>{% for l in track.artist.facts.label %}
 <li>{{ l.prefLabel }}</li>
 {% endfor %}</ul>
 
 <h3>Members(s)</h3>
-<ul>{% for m in artist.facts.membership.artist %}
+<ul>{% for m in track.artist.facts.membership.artist %}
 <li>{{ m.prefLabel }}</li>
 {% endfor %}</ul>
 

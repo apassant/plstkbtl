@@ -1,5 +1,24 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
 <ul>
 {% for track in tracks %}
-<li>{{ track.track_name }} by {{ track.artist_name }} - <a href="/play/{{ track.track_id }}">play</a></li>
+<li>{{ track.track_name }} by {{ track.artist_name }} - <a href="/play/{{ track.track_id }}" id="{{ track.track_id }}" class="play">play</a></li>
 {% endfor %}
 </ul>
+
+<iframe width="400" height="30" src="{{ track.embedUrl }}?autoplay=true"></iframe>
+
+<div id="player">
+    <iframe id="rdio"></iframe>
+    <iframe id="mxm"></iframe>
+    <iframe id="seevl"></iframe>
+</div>
+
+<script>
+$(".play").click(function() {
+    var id = $(this).attr('id');
+    $("#seevl").attr("src") = "http://google.com";
+    return false;
+    return false;
+});
+</script>
