@@ -8,6 +8,14 @@
 {% endblock %}
 </head>
 <body class="{{ nav }}">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
   <div id="header"><a href="/"><img src="/static/mixture_logo.png"></a></div>
   <div id="nav" class="{{ nav }}">
     <div class="segment" id="nav-one">
@@ -28,9 +36,8 @@
   </div>
   <div id="footer">
       <p>
-        A <a href="http://cannes.musichackday.org/2012">MIDEM HackDay 2012</a> experiment - Powered by <a href="http://www.iqengines.com">IQ Engines</a>, <a href="http://musixmatch.com">musiXmatch</a>, <a href="http://rd.io">rd.io</a>, <a href="http://seevl.net">seevl</a>, and <a href="http://webdoc.com">webdoc</a>.<br/>
-        <a href="http://wiki.musichackday.org/index.php?title=Mixture">Read more and meet the hackers</a>.
+        A <a href="http://cannes.musichackday.org/2012">MIDEM HackDay 2012</a> experiment - Powered by <a href="http://www.iqengines.com">IQ Engines</a>, <a href="http://musixmatch.com">musiXmatch</a>, <a href="http://rd.io">rd.io</a>, <a href="http://seevl.net">seevl</a>, and <a href="http://webdoc.com">webdoc</a>.<a href="http://wiki.musichackday.org/index.php?title=Mixture">Read more</a>.
     </p>
-  </div>
+    <div class="fb-like" data-href="http://mixtureapp.com" data-send="true" data-width="450" data-show-faces="true"></div>
 </body>
 </html>
